@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Header from './components/Header.jsx'
+import Footer from './components/Footer.jsx'
+import TestQuestion from './components/TestQuestion.jsx'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export class App extends Component {
+  render() {
+    return (
+      <>
+        <Header />
+        <TestQuestion 
+          questionId={1}
+          questionText="Хто каже гав гав?"
+          answers={["кіт", "собака", "папуга"]}
+        />
+        <TestQuestion 
+          questionId={2}
+          questionText="Хто каже мяв мяв?"
+          answers={["кіт", "собака", "папуга"]}
+        />
+        <Footer />
+      </>
+    )
+  }
 }
 
-export default App;
+export default App
