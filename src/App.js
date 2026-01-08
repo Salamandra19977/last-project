@@ -3,13 +3,16 @@ import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import TestQuestion from './components/TestQuestion.jsx'
 import StartQuiz from './components/StartQuiz.jsx'
+import QuizResults from './components/QuizResults.jsx'
 
 export class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
       isQuizStarted: false,
-      questionNumber: 0
+      showResults: false,
+      questionNumber: 0,
+      userAnswers: []
     }
 
     this.startQuiz = this.startQuiz.bind(this)
@@ -41,7 +44,7 @@ export class App extends Component {
         correctAnswer: "h1"
       }
     ],
-    time: 300
+    time: 10
   }
 
   nextQuestion() {
@@ -67,9 +70,11 @@ export class App extends Component {
     })
   }
 
-  stopQuiz() {
+  stopQuiz(answers) {
     this.setState({
-      isQuizStarted: false
+      isQuizStarted: false,
+      showResults: true,
+      userAnswers: answers
     })
   }
 
@@ -97,6 +102,8 @@ export class App extends Component {
             previousQuestion={this.previousQuestion}
             stopQuiz={this.stopQuiz}
           />
+        ) : this.state.showResults ? (
+          <QuizResults />
         ) : (
           <StartQuiz 
             name={this.quiz1.quizName}

@@ -24,6 +24,10 @@ export class TestQuestion extends Component {
         input.checked = this.state.userAnswers[this.props.questionId - 1] === input.value
       })
     }
+
+    if (this.state.time <= 0) {
+      this.props.stopQuiz(this.state.userAnswers)
+    }
   }
 
   componentDidMount() {
@@ -60,13 +64,14 @@ export class TestQuestion extends Component {
           <button 
             className={styles.btn}
             onClick={() => this.props.previousQuestion()}
+            hidden={this.props.questionId === 1}
           >
             Previous
           </button>
 
           <button 
             className={styles.btn}
-            onClick={() => this.props.stopQuiz()}
+            onClick={() => this.props.stopQuiz(this.state.userAnswers)}
           >
             Stop
           </button>
@@ -74,17 +79,18 @@ export class TestQuestion extends Component {
           <button
            className={styles.btn}
            onClick={() => this.props.nextQuestion()}
+           disabled={this.props.questionId === this.props.count}
           >
             Next
           </button>
         </div>
         <progress
-          value={
-            this.state.userAnswers.length
-          }
-          // value = {
-          //   this.state.userAnswers.filter(answer => answer !== undefined).length
+          // value={
+          //   this.state.userAnswers.length
           // }
+          value = {
+            this.state.userAnswers.filter(answer => answer !== undefined).length
+          }
           max={this.props.count}
         >
         </progress>
