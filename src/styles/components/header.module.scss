@@ -1,0 +1,6 @@
+@use "../base/colors.scss" as *;
+@use "../base/mixins.scss" as *;
+
+.header {
+    @include base($text-100, $bg-100);
+}

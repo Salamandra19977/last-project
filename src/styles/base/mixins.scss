@@ -1,0 +1,9 @@
+@mixin base($color, $bg) {
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $bg;
+    color: $color;
+}
