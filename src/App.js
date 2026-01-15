@@ -19,6 +19,7 @@ export class App extends Component {
     this.stopQuiz = this.stopQuiz.bind(this)
     this.nextQuestion = this.nextQuestion.bind(this)
     this.previousQuestion = this.previousQuestion.bind(this)
+    this.tryAgain = this.tryAgain.bind(this)
   }
 
   quiz1 = {
@@ -44,7 +45,7 @@ export class App extends Component {
         correctAnswer: "h1"
       }
     ],
-    time: 10
+    time: 300
   }
 
   nextQuestion() {
@@ -78,6 +79,15 @@ export class App extends Component {
     })
   }
 
+  tryAgain() {
+    this.setState({
+      isQuizStarted: false,
+      questionNumber: 0,
+      userAnswers: [],
+      showResults: false
+    })
+  }
+
   render() {
     return (
       <>
@@ -103,7 +113,11 @@ export class App extends Component {
             stopQuiz={this.stopQuiz}
           />
         ) : this.state.showResults ? (
-          <QuizResults />
+          <QuizResults
+            info={this.quiz1}
+            results={this.state.userAnswers} 
+            tryAgain={this.tryAgain}
+          />
         ) : (
           <StartQuiz 
             name={this.quiz1.quizName}
